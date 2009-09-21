@@ -42,7 +42,7 @@ Handy alias to `cd' to a gem directory:
 
 == Contributing
 
-* Bug reports: http://github.com/oggy/gem_info
+* Bug reports: http://github.com/oggy/gem_info/issues
 * Source: http://github.com/oggy/gem_info
 * Patches: Fork on Github, send pull request.
   * Ensure patch includes tests.
