@@ -1,17 +1,52 @@
-= gem_info
+= Gem Info
 
-Description goes here.
+A rubygems plugin which adds an `info' command that prints information
+about installed gems.
 
-== Note on Patches/Pull Requests
- 
-* Fork the project.
-* Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a
-  future version unintentionally.
-* Commit, do not mess with rakefile, version, or history.
-  (if you want to have your own version, that is fine but
-   bump version in a commit by itself I can ignore when I pull)
-* Send me a pull request. Bonus points for topic branches.
+Unlike the built-in gem commands, it allows fuzzy matching on gem
+names and versions by default, and allows precise formatting of the
+output, making it easy on the command line and in scripts.
+
+== Examples
+
+View dependencies at a glance:
+
+    $ gem info -f '%name-%version: %dependencies' act
+    activesupport-2.3.3: 
+    activesupport-2.3.4: 
+    activeresource-2.3.4: activesupport = 2.3.4
+    activerecord-2.3.4: activesupport = 2.3.4
+    actionpack-2.3.4: activesupport = 2.3.4, rack ~> 1.0.0
+    actionmailer-2.3.4: actionpack = 2.3.4
+
+Handy alias to `cd' to a gem directory:
+
+    function cdrg {
+        if gem info --exactly-one $@ > /dev/null; then
+          local dir=`gem info -f '%path' $@`
+          if [ -d $dir/lib ]; then
+              cd $dir/lib
+          else
+              cd $dir
+          fi
+        fi
+    }
+
+    $ cdrg rails    # oops!
+    2 matching gems:
+      rails 2.3.3
+      rails 2.3.4
+    $ cdrg rails 4  # only 2.3.4 contains '4'
+    $ pwd
+    /usr/lib/ruby/gems/1.8/gems/rails-2.3.4/lib
+
+== Contributing
+
+* Bug reports: http://github.com/oggy/gem_info
+* Source: http://github.com/oggy/gem_info
+* Patches: Fork on Github, send pull request.
+  * Ensure patch includes tests.
+  * Leave the version alone, or bump it in a separate commit.
 
 == Copyright
 

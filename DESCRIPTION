@@ -1,0 +1,6 @@
+A rubygems plugin which adds an `info' command which prints
+information about gems.
+
+Unlike the built-in gem commands, it allows fuzzy matching on gem
+names and versions by default, and allows precise formatting of the
+output, making it easy on the command line and in scripts.

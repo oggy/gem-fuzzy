@@ -5,13 +5,14 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "gem_info"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = "Print information about gems."
+    gem.description = File.read('DESCRIPTION')
     gem.email = "george.ogata@gmail.com"
     gem.homepage = "http://github.com/oggy/gem_info"
     gem.authors = ["George Ogata"]
+    gem.required_rubygems_version = '>= 1.3.2'  # 1.3.2 introduced plugins
     gem.add_development_dependency "rspec"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.add_development_dependency "mocha"
   end
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
