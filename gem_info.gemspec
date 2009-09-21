@@ -7,9 +7,9 @@ Gem::Specification.new do |s|
   s.name = %q{gem_info}
   s.version = "0.0.0"
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.required_rubygems_version = Gem::Requirement.new(">= 1.3.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["George Ogata"]
-  s.date = %q{2009-09-20}
+  s.date = %q{2009-09-21}
   s.description = %q{A rubygems plugin which adds an `info' command which prints
 information about gems.
 
@@ -46,9 +46,9 @@ output, making it easy on the command line and in scripts.
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Print information about gems.}
   s.test_files = [
-    "spec/spec_helper.rb",
+    "spec/fuzzy_matcher_spec.rb",
      "spec/runner_spec.rb",
-     "spec/fuzzy_matcher_spec.rb"
+     "spec/spec_helper.rb"
   ]
 
   if s.respond_to? :specification_version then
