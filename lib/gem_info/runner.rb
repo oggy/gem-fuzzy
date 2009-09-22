@@ -48,7 +48,7 @@ module GemInfo
           raise Error, "no gems matching \"#{@name}\" \"#{@version}\""
         elsif specs.length > 1
           message = "#{specs.length} matching gems:\n" +
-            specs.map{|spec| "  #{spec.name}\n"}.join
+            specs.map{|spec| "  #{spec.name}-#{spec.version}\n"}.join
           raise Error, message
         end
       end
