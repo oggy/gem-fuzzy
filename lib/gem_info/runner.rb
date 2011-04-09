@@ -39,7 +39,11 @@ module GemInfo
     end
 
     def installed_specs
-      Gem.source_index.all_gems.values
+      if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.7.0')
+        Gem.source_index.gems.values
+      else
+        Gem.source_index.all_gems.values
+      end
     end
 
     def validate_exactly_one(specs)
