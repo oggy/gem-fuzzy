@@ -1,3 +1,8 @@
+== LATEST
+
+ * Silenced deprecation warnings for Rubygems 1.8.x.
+ * Fixed %dependencies for Rubygems >= 1.3.6.
+
 == 0.1.0 2011-04-09
 
  * Support for Rubygems 1.7.
