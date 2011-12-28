@@ -39,7 +39,10 @@ module GemInfo
     end
 
     def installed_specs
-      if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.7.0')
+      version = Gem::Version.new(Gem::VERSION)
+      if version >= Gem::Version.new('1.8.0')
+        Gem::Specification.to_a
+      elsif version >= Gem::Version.new('1.7.0')
         Gem.source_index.gems.values
       else
         Gem.source_index.all_gems.values
