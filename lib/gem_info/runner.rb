@@ -119,7 +119,11 @@ module GemInfo
     expand('%post_install_message'){|spec| spec.post_install_message}
     expand('%authors'){|spec| spec.authors.join(', ')}
     expand('%licenses'){|spec| spec.licenses.join(', ')}
-    expand('%dependencies'){|spec| spec.dependencies.map{|dep| "#{dep.name} #{dep.version_requirements}"}.join(', ')}
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.3.6')
+      expand('%dependencies'){|spec| spec.dependencies.map{|dep| "#{dep.name} #{dep.requirement}"}.join(', ')}
+    else
+      expand('%dependencies'){|spec| spec.dependencies.map{|dep| "#{dep.name} #{dep.version_requirements}"}.join(', ')}
+    end
     expand('%path'){|spec| spec.full_gem_path}
     expand('%%'){|spec| '%'}
     expand('%N'){|spec| "\n"}
