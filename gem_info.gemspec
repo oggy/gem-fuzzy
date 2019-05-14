@@ -23,7 +23,4 @@ Gem::Specification.new do |gem|
   gem.test_files = Dir['spec/**/*.rb']
 
   gem.specification_version = 3
-  gem.add_development_dependency 'ritual', '~> 0.3.0'
-  gem.add_development_dependency 'rspec', '~> 2.7.0'
-  gem.add_development_dependency 'mocha'
 end
