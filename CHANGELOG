@@ -1,4 +1,4 @@
-== LATEST
+== 1.0.0 2019-05-14
 
  * Command is now "gem fuzzy ...", as gem now has its own "info" command.
  * The gem is now called gem-fuzzy to match.
