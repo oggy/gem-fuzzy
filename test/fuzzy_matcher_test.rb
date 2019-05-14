@@ -1,6 +1,6 @@
-require 'spec_helper'
+require_relative 'test_helper'
 
-describe FuzzyMatcher do
+describe GemInfo::FuzzyMatcher do
   before do
     @specs = []
   end
@@ -16,7 +16,7 @@ describe FuzzyMatcher do
   describe "#matches" do
     describe "when no version is given" do
       before do
-        @matcher = FuzzyMatcher.new('name', nil)
+        @matcher = GemInfo::FuzzyMatcher.new('name', nil)
       end
 
       describe "when there are specs whose name matches the term exactly" do
@@ -26,12 +26,12 @@ describe FuzzyMatcher do
         end
 
         it "should return the matching specs" do
-          @matcher.matches(@specs).should == [@name1, @name2]
+          @matcher.matches(@specs).must_equal [@name1, @name2]
         end
 
         it "should not return any specs whose name only contains the term" do
           xnamex = spec('xnamex')
-          @matcher.matches(@specs).should_not include(xnamex)
+          @matcher.matches(@specs).wont_include xnamex
         end
       end
 
@@ -42,12 +42,12 @@ describe FuzzyMatcher do
         end
 
         it "should return any specs whose name contains the term" do
-          @matcher.matches(@specs).should == [@aname, @nameb]
+          @matcher.matches(@specs).must_equal [@aname, @nameb]
         end
 
         it "should not return any specs whose name only contains the term as a subsequence" do
           @nxame = spec('nxame')
-          @matcher.matches(@specs).should_not include(@nxame)
+          @matcher.matches(@specs).wont_include @nxame
         end
       end
 
@@ -58,26 +58,26 @@ describe FuzzyMatcher do
         end
 
         it "should return any specs whose name contains the term as a subsequence" do
-          @matcher.matches(@specs).should == [@nxame, @n_axxme]
+          @matcher.matches(@specs).must_equal [@nxame, @n_axxme]
         end
 
         it "should not return any specs whose name does not contain the term as a subsequence" do
           @zzz = spec('zzz')
-          @matcher.matches(@specs).should_not include(@zzz)
+          @matcher.matches(@specs).wont_include @zzz
         end
       end
 
       describe "when there are no specs whose name contains the term as a subsequence" do
         it "should return no results" do
           spec('zzz')
-          @matcher.matches(@specs).should == []
+          @matcher.matches(@specs).must_equal []
         end
       end
     end
 
     describe "when a version is given" do
       before do
-        @matcher = FuzzyMatcher.new('name', '1.2')
+        @matcher = GemInfo::FuzzyMatcher.new('name', '1.2')
       end
 
       describe "when there are specs whose version matches the term exactly" do
@@ -87,12 +87,12 @@ describe FuzzyMatcher do
         end
 
         it "should return the matching specs" do
-          @matcher.matches(@specs).should == [@name1, @name2]
+          @matcher.matches(@specs).must_equal [@name1, @name2]
         end
 
         it "should not return any specs whose version only contains the term" do
           v11 = spec('name', '1.2.3')
-          @matcher.matches(@specs).should_not include(v11)
+          @matcher.matches(@specs).wont_include v11
         end
       end
 
@@ -103,12 +103,12 @@ describe FuzzyMatcher do
         end
 
         it "should return any specs whose version contains the term" do
-          @matcher.matches(@specs).should == [@v121, @v122]
+          @matcher.matches(@specs).must_equal [@v121, @v122]
         end
 
         it "should not return any specs whose version only contains the term as a subsequence" do
           v132 = spec('name', '1.3.2')
-          @matcher.matches(@specs).should_not include(v132)
+          @matcher.matches(@specs).wont_include v132
         end
       end
 
@@ -119,27 +119,27 @@ describe FuzzyMatcher do
         end
 
         it "should return any specs whose version contains the term as a subsequence" do
-          @matcher.matches(@specs).should == [@v132, @v142]
+          @matcher.matches(@specs).must_equal [@v132, @v142]
         end
 
         it "should not return any specs whose version does not contain the term as a subsequence" do
           v45 = spec('name', '4.5')
-          @matcher.matches(@specs).should_not include(v45)
+          @matcher.matches(@specs).wont_include v45
         end
       end
 
       describe "when there are no specs whose version contains the term as a subsequence" do
         it "should return no results" do
           spec('name', '4.5')
-          @matcher.matches(@specs).should == []
+          @matcher.matches(@specs).must_equal []
         end
       end
 
       it "should filter the specs whose name matches with the version" do
-        name_only_match = spec('name', '4.5')
-        version_only_match = spec('unmatched', '1.2')
+        _name_only_match = spec('name', '4.5')
+        _version_only_match = spec('unmatched', '1.2')
         name_and_version_match = spec('name', '1.2')
-        @matcher.matches(@specs).should == [name_and_version_match]
+        @matcher.matches(@specs).must_equal [name_and_version_match]
       end
     end
   end

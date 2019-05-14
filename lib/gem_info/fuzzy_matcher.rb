@@ -23,7 +23,7 @@ module GemInfo
       []
     end
 
-    private  # -------------------------------------------------------
+    private
 
     def exact_matches(specs, attribute, value)
       specs.select{|spec| spec.send(attribute).to_s == value}

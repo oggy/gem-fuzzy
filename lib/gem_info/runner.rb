@@ -21,7 +21,18 @@ module GemInfo
       output_formatted(specs)
     end
 
-    private  # ---------------------------------------------------------
+    def installed_specs
+      version = Gem::Version.new(Gem::VERSION)
+      if version >= Gem::Version.new('1.8.0')
+        Gem::Specification.to_a
+      elsif version >= Gem::Version.new('1.7.0')
+        Gem.source_index.gems.values
+      else
+        Gem.source_index.all_gems.values
+      end
+    end
+
+    private
 
     def parse_args
       case @args.length
@@ -36,17 +47,6 @@ module GemInfo
 
     def parse_options
       @format = options[:format] || "%name %version"
-    end
-
-    def installed_specs
-      version = Gem::Version.new(Gem::VERSION)
-      if version >= Gem::Version.new('1.8.0')
-        Gem::Specification.to_a
-      elsif version >= Gem::Version.new('1.7.0')
-        Gem.source_index.gems.values
-      else
-        Gem.source_index.all_gems.values
-      end
     end
 
     def validate_exactly_one(specs)
@@ -71,7 +71,7 @@ module GemInfo
     def format(spec)
       @format.gsub(format_regexp) do |match|
         if match =~ /\A%date/
-          expansion = expand_date(spec, match)
+          expand_date(spec, match)
         else
           self.class.expansions[match].call(spec)
         end
