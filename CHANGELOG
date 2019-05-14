@@ -1,3 +1,8 @@
+== LATEST
+
+ * Command is now "gem fuzzy ...", as gem now has its own "info" command.
+ * The gem is now called gem-fuzzy to match.
+
 == 0.1.1 2011-12-28
 
  * Silenced deprecation warnings for Rubygems 1.8.x.
