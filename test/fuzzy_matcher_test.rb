@@ -1,6 +1,6 @@
 require_relative 'test_helper'
 
-describe GemInfo::FuzzyMatcher do
+describe GemFuzzy::FuzzyMatcher do
   before do
     @specs = []
   end
@@ -16,7 +16,7 @@ describe GemInfo::FuzzyMatcher do
   describe "#matches" do
     describe "when no version is given" do
       before do
-        @matcher = GemInfo::FuzzyMatcher.new('name', nil)
+        @matcher = GemFuzzy::FuzzyMatcher.new('name', nil)
       end
 
       describe "when there are specs whose name matches the term exactly" do
@@ -77,7 +77,7 @@ describe GemInfo::FuzzyMatcher do
 
     describe "when a version is given" do
       before do
-        @matcher = GemInfo::FuzzyMatcher.new('name', '1.2')
+        @matcher = GemFuzzy::FuzzyMatcher.new('name', '1.2')
       end
 
       describe "when there are specs whose version matches the term exactly" do

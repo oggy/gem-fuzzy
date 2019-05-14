@@ -1,13 +1,13 @@
 require 'rubygems/command_manager'
-require 'gem_info'
+require 'gem_fuzzy'
 
-Gem::CommandManager.instance.register_command :info
+Gem::CommandManager.instance.register_command :fuzzy
 
 module Gem
   module Commands
-    class InfoCommand < Command
+    class FuzzyCommand < Command
       def initialize
-        super 'info', "Print information about a gem.  Fuzzy matching available."
+        super 'fuzzy', "Search for gems with fuzzy matching."
         add_option('-1', '--exactly-one', "Fail if not exactly 1 match.") do |value, options|
           options[:exactly_one] = true
         end
@@ -42,10 +42,10 @@ module Gem
           |
           | * Look for gems exactly matching NAME.
           | * If none found, look for gems containing NAME. e.g.,
-          |   "inf" matches "gem_info"
+          |   "fuz" matches "gem-fuzzy"
           | * If none found, look for gems containing the characters
-          |   of NAME in the same order.  e.g, "e_nf" matches
-          |   "gem_info"
+          |   of NAME in the same order.  e.g, "e_zy" matches
+          |   "gem-fuzzy"
           | * Filter the results above with the version string in the
           |   same way.
           |
@@ -107,11 +107,11 @@ module Gem
 
       def execute
         begin
-          GemInfo::Runner.run(options, *options[:args])
-        rescue GemInfo::UsageError
+          GemFuzzy::Runner.run(options, *options[:args])
+        rescue GemFuzzy::UsageError
           STDERR.puts "USAGE: #{usage}"
           terminate_interaction(1)
-        rescue GemInfo::Error => e
+        rescue GemFuzzy::Error => e
           STDERR.puts e.message
           terminate_interaction(1)
         rescue Object => e

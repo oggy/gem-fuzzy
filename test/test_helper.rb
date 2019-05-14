@@ -3,4 +3,4 @@ $:.unshift "#{ROOT}/lib"
 
 require 'minitest/autorun'
 require 'minitest/around/spec'
-require 'gem_info'
+require 'gem_fuzzy'

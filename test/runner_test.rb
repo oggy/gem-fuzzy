@@ -1,8 +1,8 @@
 require_relative 'test_helper'
 
-describe GemInfo::Runner do
+describe GemFuzzy::Runner do
   before do
-    @runner = GemInfo::Runner.new({}, 'mygem', '1.2')
+    @runner = GemFuzzy::Runner.new({}, 'mygem', '1.2')
     @runner.output = StringIO.new
   end
 
@@ -25,12 +25,12 @@ describe GemInfo::Runner do
   describe "#initialize" do
     it "should raise a UsageError if no non-option arguments are given" do
       @runner.args = []
-      lambda{@runner.run}.must_raise GemInfo::UsageError
+      lambda{@runner.run}.must_raise GemFuzzy::UsageError
     end
 
     it "should raise a UsageError if more than 2 non-option arguments are given" do
       @runner.args = ['x', 'x', 'x']
-      lambda{@runner.run}.must_raise GemInfo::UsageError
+      lambda{@runner.run}.must_raise GemFuzzy::UsageError
     end
   end
 
@@ -41,13 +41,13 @@ describe GemInfo::Runner do
 
     it "should raise an error if no matches are found" do
       stub_specs [] do
-        lambda{@runner.run}.must_raise GemInfo::Error
+        lambda{@runner.run}.must_raise GemFuzzy::Error
       end
     end
 
     it "should raise an error if more than one match is found" do
       stub_specs [make_spec('mygem1', '1.2'), make_spec('mygem2', '1.2')] do
-        lambda{@runner.run}.must_raise GemInfo::Error
+        lambda{@runner.run}.must_raise GemFuzzy::Error
       end
     end
 

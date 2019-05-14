@@ -1,4 +1,4 @@
-module GemInfo
+module GemFuzzy
   class Runner
     def self.run(options, *args)
       Runner.new(options, *args).run

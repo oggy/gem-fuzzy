@@ -1,4 +1,4 @@
-module GemInfo
+module GemFuzzy
   class FuzzyMatcher
     def initialize(name, version)
       @name = name

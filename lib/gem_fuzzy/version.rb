@@ -1,4 +1,4 @@
-module GemInfo
+module GemFuzzy
   VERSION = [0, 1, 1]
 
   class << VERSION
